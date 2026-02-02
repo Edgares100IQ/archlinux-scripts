@@ -1,6 +1,4 @@
-
-#Todos los scripts estan enfocados al entorno grafico "end-4"
-
+# Todos los scripts estan enfocados al entorno gafico de "end-4" en hyprland
 # Como ejecutar los scripts
 Los scripts se ejecutan con bash y sin sudo
 
