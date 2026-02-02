@@ -35,6 +35,11 @@ env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff N
 
 flatpak install flathub com.valvesoftware.Steam -y
 
+mkdir -p ~/wallpapers
+cd ~/wallpapers
+curl -LO https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/fondo.jpg
+sed -i "83c\        \"wallpaperPath\": \"$HOME/wallpapers/fondo.jpg\"," ~/.config/illogical-impulse/config.json
+
 sudo rm -f /etc/sudoers.d/99-pacman-nopasswd
 
 for i in {10..1}; do
