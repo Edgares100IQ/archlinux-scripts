@@ -1,3 +1,6 @@
+
+#Todos los scripts estan enfocados al entorno grafico "end-4"
+
 # Como ejecutar los scripts
 Los scripts se ejecutan con bash y sin sudo
 
