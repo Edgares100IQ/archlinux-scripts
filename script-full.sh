@@ -28,6 +28,7 @@ cd ~
 sudo sed -i '/^OPTIONS=/c\OPTIONS=(!strip docs libtool staticlibs emptydirs zipman purge !debug lto)' /etc/makepkg.conf
 rm -rf ~/.cache/yay/vscodium-bin
 
+yay -S --noconfirm --needed --answerclean All --answerdiff None nwg-displays
 yay -S --noconfirm --needed --answerclean All --answerdiff None opera
 yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin
 env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff None vscodium-bin --mflags "--nocheck --skipinteg"
