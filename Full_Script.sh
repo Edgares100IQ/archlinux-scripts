@@ -1,5 +1,3 @@
-#!/bin/bash
-
 sudo -v
 echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" | sudo tee /etc/sudoers.d/99-pacman-nopasswd
 sudo chmod 440 /etc/sudoers.d/99-pacman-nopasswd
@@ -38,29 +36,36 @@ flatpak install flathub com.valvesoftware.Steam -y
 mkdir -p ~/wallpapers
 cd ~/wallpapers
 curl -LO https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/fondo.jpg
-sed -i "83c\        \"wallpaperPath\": \"$HOME/wallpapers/fondo.jpg\"," ~/.config/illogical-impulse/config.json
+sed -i 's|"wallpaperPath": ".*"|"wallpaperPath": "'"$HOME"'/wallpapers/fondo.jpg"|' ~/.config/illogical-impulse/config.json
 #-----------------------------------------------------------------------------------------------------------------#
 
 
 
 #----------------------------------------------------# SDDM #----------------------------------------------------#
+cd /tmp
+rm -rf SilentSDDM
 git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
 cd SilentSDDM
-./install.sh
+chmod +x install.sh
+sudo ./install.sh
 #----------------------------------------------------------------------------------------------------------------#
 
 
 
 #--------------------------------------------# Fuente de Minecraft #--------------------------------------------#
 mkdir -p ~/.local/share/fonts
-wget https://github.com/IdreesInc/Monocraft/releases/latest/download/Monocraft.ttc -P ~/.local/share/fonts/
+wget -q https://github.com/IdreesInc/Monocraft/releases/latest/download/Monocraft.ttc -O ~/.local/share/fonts/Monocraft.ttc
 fc-cache -fv
 
-sed -i '2c\font_family Monocraft' ~/.config/kitty/kitty.conf
-sed -i '26c\      "main": "Monocraft",' ~/.config/illogical-impulse/config.json
-sed -i '27c\      "monospace": "Monocraft",' ~/.config/illogical-impulse/config.json
-sed -i '28c\      "numbers": "Monocraft",' ~/.config/illogical-impulse/config.json
-sed -i '30c\      "title": "Monocraft"' ~/.config/illogical-impulse/config.json
+[ -f ~/.config/kitty/kitty.conf ] && sed -i 's/^font_family .*/font_family Monocraft/' ~/.config/kitty/kitty.conf
+if [ -f ~/.config/illogical-impulse/config.json ]; then
+    sed -i 's/"main": ".*"/"main": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/"monospace": ".*"/"monospace": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/"numbers": ".*"/"numbers": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/"title": ".*"/"title": "Monocraft"/' ~/.config/illogical-impulse/config.json
+fi
+
+mkdir -p ~/.config/VSCodium/User
 echo '{
     "editor.fontFamily": "'\''Monocraft'\''",
     "editor.fontSize": 14,
