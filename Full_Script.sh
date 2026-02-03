@@ -36,7 +36,7 @@ flatpak install flathub com.valvesoftware.Steam -y
 mkdir -p ~/wallpapers
 cd ~/wallpapers
 curl -LO https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/fondo.jpg
-sed -i 's|"wallpaperPath": ".*"|"wallpaperPath": "'"$HOME"'/wallpapers/fondo.jpg"|' ~/.config/illogical-impulse/config.json
+sed -i 's|\([[:space:]]*\)"wallpaperPath": ".*"|\1"wallpaperPath": "'"$HOME"'/wallpapers/fondo.jpg"|' ~/.config/illogical-impulse/config.json
 #-----------------------------------------------------------------------------------------------------------------#
 
 
@@ -59,10 +59,10 @@ fc-cache -fv
 
 [ -f ~/.config/kitty/kitty.conf ] && sed -i 's/^font_family .*/font_family Monocraft/' ~/.config/kitty/kitty.conf
 if [ -f ~/.config/illogical-impulse/config.json ]; then
-    sed -i 's/"main": ".*"/"main": "Monocraft"/' ~/.config/illogical-impulse/config.json
-    sed -i 's/"monospace": ".*"/"monospace": "Monocraft"/' ~/.config/illogical-impulse/config.json
-    sed -i 's/"numbers": ".*"/"numbers": "Monocraft"/' ~/.config/illogical-impulse/config.json
-    sed -i 's/"title": ".*"/"title": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/\([[:space:]]*\)"main": ".*"/\1"main": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/\([[:space:]]*\)"monospace": ".*"/\1"monospace": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/\([[:space:]]*\)"numbers": ".*"/\1"numbers": "Monocraft"/' ~/.config/illogical-impulse/config.json
+    sed -i 's/\([[:space:]]*\)"title": ".*"/\1"title": "Monocraft"/' ~/.config/illogical-impulse/config.json
 fi
 
 mkdir -p ~/.config/VSCodium/User
