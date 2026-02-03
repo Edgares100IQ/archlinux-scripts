@@ -1,3 +1,6 @@
+#!/bin/bash
+chmod +x Full_Script.sh
+
 #----------------------------------------------# Privilegios Sudo #----------------------------------------------#
 sudo -v
 echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" | sudo tee /etc/sudoers.d/99-pacman-nopasswd
@@ -64,10 +67,26 @@ flatpak install flathub com.valvesoftware.Steam -y
 
 
 #----------------------------------------------# Fondo de Pantalla #----------------------------------------------#
+rm ~/.config/illogical-impulse/config.json
 mkdir -p ~/wallpapers
 cd ~/wallpapers
 curl -LO https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/fondo.jpg
-sed -i 's|^\([[:space:]]*\)"wallpaperPath": ".*"|\1"wallpaperPath": "'"$HOME"'/wallpapers/fondo.jpg"|' ~/.config/illogical-impulse/config.json
+mkdir -p ~/.config/illogical-impulse
+CONFIG_FILE=~/.config/illogical-impulse/config.json
+WP_REAL_PATH="$HOME/wallpapers/fondo.jpg"
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "{\"wallpaperPath\": \"$WP_REAL_PATH\"}" > "$CONFIG_FILE"
+else
+    if grep -q "wallpaperPath" "$CONFIG_FILE"; then
+        sed -i "s|\"wallpaperPath\": \".*\"|\"wallpaperPath\": \"$WP_REAL_PATH\"|" "$CONFIG_FILE"
+    else
+        if grep -q "^{}$" "$CONFIG_FILE"; then
+             echo "{\"wallpaperPath\": \"$WP_REAL_PATH\"}" > "$CONFIG_FILE"
+        else
+             sed -i "s|}|  ,\"wallpaperPath\": \"$WP_REAL_PATH\"\n}|" "$CONFIG_FILE"
+        fi
+    fi
+fi
 #-----------------------------------------------------------------------------------------------------------------#
 
 
