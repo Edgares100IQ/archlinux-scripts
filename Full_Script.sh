@@ -5,11 +5,11 @@ chmod +x Full_Script.sh
 sudo -v
 echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" | sudo tee /etc/sudoers.d/99-pacman-nopasswd
 sudo chmod 440 /etc/sudoers.d/99-pacman-nopasswd
-#-----------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------------------------#
 
 
 
-#-------------------------------------------# Actualización de Sistema #-------------------------------------------#
+#-------------------------------------------# Actualización de Sistema #------------------------------------------#
 sudo pacman -Sy archlinux-keyring --noconfirm
 sudo pacman -Syu --noconfirm
 #-----------------------------------------------------------------------------------------------------------------#
@@ -22,7 +22,7 @@ sudo pacman -S --needed gcc cmake git curl perl wget base-devel rust go sassc fl
 
 
 
-#------------------------------------------------# Instalación Yay #------------------------------------------------#
+#------------------------------------------------# Instalación Yay #----------------------------------------------#
 if ! command -v yay &> /dev/null; then
     cd /tmp && rm -rf yay-bin
     git clone https://aur.archlinux.org/yay-bin.git
@@ -38,7 +38,7 @@ yay -S --noconfirm --needed cava pavucontrol-qt wireplumber pipewire-pulse libdb
 
 
 
-#--------------------------------------------# Instalación de Entorno #--------------------------------------------#
+#--------------------------------------------# Instalación de Entorno #-------------------------------------------#
 cd ~/.cache
 rm -rf dots-hyprland
 git clone --depth 1 https://github.com/end-4/dots-hyprland
@@ -49,7 +49,7 @@ chmod +x setup
 
 
 
-#--------------------------------------------# Optimización Makepkg #--------------------------------------------#
+#--------------------------------------------# Optimización Makepkg #---------------------------------------------#
 cd ~
 sudo sed -i '/^OPTIONS=/c\OPTIONS=(!strip docs libtool staticlibs emptydirs zipman purge !debug lto)' /etc/makepkg.conf
 rm -rf ~/.cache/yay/vscodium-bin
@@ -110,7 +110,13 @@ curl -LO https://github.com/Edgares100IQ/archlinux-scripts/raw/main/default_wall
 
 
 
-#----------------------------------------------# Limpieza y Reinicio #----------------------------------------------#
+#-------------------------------------------------# Upscayl #-----------------------------------------#
+yay -S --noconfirm --needed --answerclean All --answerdiff None upscayl-bin
+#-----------------------------------------------------------------------------------------------------#
+
+
+
+#----------------------------------------------# Limpieza y Reinicio #--------------------------------------------#
 sudo rm -f /etc/sudoers.d/99-pacman-nopasswd
 
 for i in {10..1}; do
