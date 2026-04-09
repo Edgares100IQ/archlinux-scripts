@@ -1,25 +1,33 @@
 #!/bin/bash
 chmod +x Full_Script.sh
 
-#----------------------------------------------# Privilegios Sudo #----------------------------------------------#
+#---------------------------------------# Privilegios Sudo #----------------------------------------#
+# - Ningun comando pedira contrasena - #
+
 sudo -v
 echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" | sudo tee /etc/sudoers.d/99-pacman-nopasswd
 sudo chmod 440 /etc/sudoers.d/99-pacman-nopasswd
-#----------------------------------------------------------------------------------------------------------------#
+
+#---------------------------------------------------------------------------------------------------#
 
 
 
-#------------------------------------------------# Instalación Yay #----------------------------------------------#
+#-------------------# Instalación Yay #-------------------#
+# - Solo instala yay si no esta ya en el sistema - #
+
 if ! command -v yay &> /dev/null; then
     cd /tmp && rm -rf yay-bin
     git clone https://aur.archlinux.org/yay-bin.git
     cd yay-bin && makepkg -si --noconfirm
 fi
-#-----------------------------------------------------------------------------------------------------------------#
+
+#---------------------------------------------------------#
 
 
 
-#----------------------------------------------# Elegir navegador #---------------------------------------------#
+#-----------------------------------------# Elegir navegador #-----------------------------------------#
+# - Menu interactivo para elegir el navegador que se instalara - #
+
 while true; do
   echo "¿Qué navegador quieres instalar?"
   echo "1) Firefox"
@@ -41,70 +49,95 @@ while true; do
     *) echo "opción no válida, inténtalo de nuevo" ;;
   esac
 done
-#---------------------------------------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------------------------------#
 
 
 
-#-------------------------------------------# Actualización de Sistema #------------------------------------------#
+#-----------# Actualización de Sistema #------------#
+# - Actualiza el keyring y todos los paquetes del sistema - #
+
 sudo pacman -Sy archlinux-keyring --noconfirm
 sudo pacman -Syu --noconfirm
-#-----------------------------------------------------------------------------------------------------------------#
+
+#---------------------------------------------------#
 
 
 
-#-------------------------------------------# Instalación de Paquetes #-------------------------------------------#
-sudo pacman -S --needed gcc cmake git curl perl wget base-devel rust go sassc flatpak libreoffice-fresh gimp discord blender noto-fonts ttf-dejavu ttf-liberation ttf-ubuntu-font-family ttf-fira-sans --noconfirm
-#-----------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------# Instalación de Paquetes #------------------------------------------------------#
+# - Instala herramientas de desarrollo, fuentes y aplicaciones base - #
+
+sudo pacman -S --needed gcc cmake git curl perl wget base-devel rust go sassc flatpak libreoffice-fresh gimp discord --noconfirm
+sudo pacman -S --needed blender noto-fonts ttf-dejavu ttf-liberation ttf-ubuntu-font-family ttf-fira-sans --noconfirm
+
+#--------------------------------------------------------------------------------------------------------------------------------------#
 
 
 
-#----------------------------------------------# Paquetes de Audio #----------------------------------------------#
+#-------------------------------------------# Paquetes de Audio #-------------------------------------------#
+# - Instala el stack de audio y control de volumen - #
+
 yay -S --noconfirm --needed cava pavucontrol-qt wireplumber pipewire-pulse libdbusmenu-gtk3 playerctl
-#-----------------------------------------------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------------------------------------#
 
 
 
-#--------------------------------------------# Instalación de Entorno #-------------------------------------------#
+#--------------------------------------------# Instalación de Entorno #--------------------------------------------#
+# - Clona y ejecuta el setup de dots-hyprland - #
+
 cd ~/.cache
 rm -rf dots-hyprland
 git clone --depth 1 https://github.com/end-4/dots-hyprland
 cd dots-hyprland
 chmod +x setup
 (printf '\n\n\n\nn\nyesforall\n'; sleep 5; while true; do echo "y"; sleep 2; done) | ./setup install || true
-#-----------------------------------------------------------------------------------------------------------------#
+
+#------------------------------------------------------------------------------------------------------------------#
 
 
 
-#--------------------------------------------# Optimización Makepkg #---------------------------------------------#
+#--------------------------------------------------# Optimización Makepkg #---------------------------------------------------#
+# - Ajusta las flags de compilacion para builds mas rapidos - #
+
 cd ~
 sudo sed -i '/^OPTIONS=/c\OPTIONS=(!strip docs libtool staticlibs emptydirs zipman purge !debug lto)' /etc/makepkg.conf
 rm -rf ~/.cache/yay/vscodium-bin
-#-----------------------------------------------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------------------------------------------------------#
 
 
 
-#-------------------------------------------# Instalación de Software #-------------------------------------------#
+#------------------------------------------------------# Instalación de Software #------------------------------------------------------#
+# - Instala Heroic, VSCodium, Steam, Upscayl y gestor de pantallas - #
+
 yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin
 env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff None vscodium-bin --mflags "--nocheck --skipinteg"
 flatpak install flathub com.valvesoftware.Steam -y
 yay -S --noconfirm --needed --answerclean All --answerdiff None upscayl-bin
 sudo pacman -S --needed nwg-displays --noconfirm
-#-----------------------------------------------------------------------------------------------------------------#
+
+#---------------------------------------------------------------------------------------------------------------------------------------#
 
 
 
-#----------------------------------------------------# SDDM #----------------------------------------------------#
+#--------------------------------# SDDM #---------------------------------#
+# - Instala el tema SilentSDDM como pantalla de inicio de sesion - #
+
 cd /tmp
 rm -rf SilentSDDM
 git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
 cd SilentSDDM
 chmod +x install.sh
 sudo ./install.sh
-#----------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------------------#
 
 
 
-#--------------------------------------------# Fuente de Minecraft #--------------------------------------------#
+#-----------------------------------------------------# Fuente de Minecraft #-----------------------------------------------------#
+# - Descarga Monocraft y la aplica en kitty, illogical-impulse y VSCodium - #
+
 mkdir -p ~/.local/share/fonts
 wget -q https://github.com/IdreesInc/Monocraft/releases/latest/download/Monocraft.ttc -O ~/.local/share/fonts/Monocraft.ttc
 fc-cache -fv
@@ -125,32 +158,38 @@ echo '{
     "security.workspace.trust.untrustedFiles": "open",
     "material-code.primaryColor": "#3355CB"
 }' > ~/.config/VSCodium/User/settings.json
-#---------------------------------------------------------------------------------------------------------------#
+
+#---------------------------------------------------------------------------------------------------------------------------------#
 
 
 
-#-------------------------------------------------# Fondo de Pantalla #-----------------------------------------#
+#-------------------------------------# Fondo de Pantalla #-------------------------------------#
+# - Reemplaza el fondo por defecto con el fondo personalizado - #
+
 rm /home/edgar/.config/quickshell/ii/assets/images/default_wallpaper.png
 cd /home/edgar/.config/quickshell/ii/assets/images/
 curl -LO https://github.com/Edgares100IQ/archlinux-scripts/raw/main/default_wallpaper.png
-#---------------------------------------------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------------------------#
 
 
 
-#--------------------------------------------# Eliminar entorno DE anterior #-----------------------------------------#
-# Detectar y eliminar KDE Plasma u otros DE
+#--------------------------------------------# Eliminar entorno DE anterior #---------------------------------------------#
+# - Borra cualquier DE instalado previamente y limpia huerfanos - #
+
 sudo pacman -Rns --noconfirm plasma plasma-desktop plasma-wayland-session kde-applications sddm 2>/dev/null || true
 sudo pacman -Rns --noconfirm gnome gnome-shell gnome-session 2>/dev/null || true
 sudo pacman -Rns --noconfirm xfce4 xfce4-goodies 2>/dev/null || true
 sudo pacman -Rns --noconfirm lxde lxqt 2>/dev/null || true
-
-# Limpiar huérfanos que queden
 sudo pacman -Rns --noconfirm $(pacman -Qdtq) 2>/dev/null || true
-#----------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------------------------------------------------------------------#
 
 
 
-#----------------------------------------------# Limpieza y Reinicio #--------------------------------------------#
+#-------------# Limpieza y Reinicio #--------------#
+# - Elimina el permiso sudo temporal y reinicia el sistema - #
+
 sudo rm -f /etc/sudoers.d/99-pacman-nopasswd
 
 for i in {10..1}; do
@@ -158,5 +197,5 @@ for i in {10..1}; do
   sleep 1
 done
 sudo reboot
-#-----------------------------------------------------------------------------------------------------------------#
 
+#--------------------------------------------------#
