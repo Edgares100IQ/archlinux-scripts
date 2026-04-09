@@ -136,6 +136,7 @@ env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff N
 flatpak install flathub com.valvesoftware.Steam -y
 yay -S --noconfirm --needed --answerclean All --answerdiff None upscayl-bin
 sudo pacman -S --needed nwg-displays --noconfirm
+sudo pacman -S --needed wine --noconfirm
 
 #---------------------------------------------------------------------------------------------------------------------------------------#
 
