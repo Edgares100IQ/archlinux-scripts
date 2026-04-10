@@ -204,6 +204,8 @@ done
 
 sudo pacman -S --needed sddm --noconfirm
 sudo systemctl enable sddm
+sudo rm -f /usr/share/wayland-sessions/plasmawayland.desktop
+sudo rm -f /usr/share/xsessions/plasma.desktop
 
 #--------------------------------------------------------------#
 
