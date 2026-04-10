@@ -88,6 +88,10 @@ done
 
 clear
 
+export navegador
+export editor
+export launcher
+
 #-------------------------------------------------------------#
 
 
@@ -117,7 +121,6 @@ echo ">>> Instalando editor..."
 case $editor in
   1) env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff None vscodium-bin --mflags "--nocheck --skipinteg" ;;
   2) yay -S --noconfirm --needed --answerclean All --answerdiff None windsurf
-     windsurf --no-sandbox ;;
   3) yay -S --noconfirm --needed --answerclean All --answerdiff None antigravity ;;
   4) echo "sin editor, ok" ;;
 esac
@@ -131,9 +134,11 @@ esac
 
 echo ">>> Instalando launcher..."
 case $launcher in
-  1) flatpak install flathub com.valvesoftware.Steam -y ;;
+  1) sudo pacman -S --needed flatpak -noconfirm
+     flatpak install flathub com.valvesoftware.Steam -y ;;
   2) yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin ;;
-  3) flatpak install flathub com.valvesoftware.Steam -y
+  3) sudo pacman -S --needed flatpak -noconfirm
+     flatpak install flathub com.valvesoftware.Steam -y
      yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin ;;
   4) echo "sin launcher, ok" ;;
 esac
@@ -157,7 +162,7 @@ sudo pacman -Syu --noconfirm
 # - Instala herramientas de desarrollo, fuentes y aplicaciones base - #
 
 echo ">>> Instalando paquetes base..."
-sudo pacman -S --needed gcc cmake git curl perl wget base-devel rust go sassc flatpak libreoffice-fresh gimp discord --noconfirm
+sudo pacman -S --needed gcc cmake git curl perl wget base-devel rust go sassc libreoffice-fresh gimp discord --noconfirm
 sudo pacman -S --needed blender noto-fonts ttf-dejavu ttf-liberation ttf-ubuntu-font-family ttf-fira-sans --noconfirm
 
 #--------------------------------------------------------------------------------------------------------------------------------------#
