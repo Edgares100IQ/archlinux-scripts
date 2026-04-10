@@ -119,8 +119,8 @@ esac
 
 echo ">>> Instalando editor..."
 case $editor in
-  1) env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff None vscodium-bin --mflags "--nocheck --skipinteg" ;;
-  2) yay -S --noconfirm --needed --answerclean All --answerdiff None windsurf
+  1) env -u MAKEPKGFLAGS yay -S --noconfirm --needed --answerclean All --answerdiff None vscodium-bin --mflags '--nocheck --skipinteg' ;;
+  2) yay -S --noconfirm --needed --answerclean All --answerdiff None windsurf ;;
   3) yay -S --noconfirm --needed --answerclean All --answerdiff None antigravity ;;
   4) echo "sin editor, ok" ;;
 esac
@@ -134,10 +134,10 @@ esac
 
 echo ">>> Instalando launcher..."
 case $launcher in
-  1) sudo pacman -S --needed flatpak -noconfirm
+  1) sudo pacman -S --needed flatpak --noconfirm
      flatpak install flathub com.valvesoftware.Steam -y ;;
   2) yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin ;;
-  3) sudo pacman -S --needed flatpak -noconfirm
+  3) sudo pacman -S --needed flatpak --noconfirm
      flatpak install flathub com.valvesoftware.Steam -y
      yay -S --noconfirm --needed --answerclean All --answerdiff None heroic-games-launcher-bin ;;
   4) echo "sin launcher, ok" ;;
@@ -188,7 +188,9 @@ rm -rf dots-hyprland
 git clone --depth 1 https://github.com/end-4/dots-hyprland
 cd dots-hyprland
 chmod +x setup
+exec 3<&0
 (printf '\n\n\n\nn\nyesforall\n'; sleep 5; while true; do echo "y"; sleep 2; done) | ./setup install || true
+exec 0<&3 3<&-
 
 #------------------------------------------------------------------------------------------------------------#
 
