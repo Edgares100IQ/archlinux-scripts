@@ -209,6 +209,21 @@ sudo systemctl enable sddm
 
 
 
+#--------------------------------# SDDM #---------------------------------#
+# - Instala el tema SilentSDDM como pantalla de inicio de sesion - #
+
+echo ">>> Instalando SDDM..."
+cd /tmp
+rm -rf SilentSDDM
+git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
+cd SilentSDDM
+chmod +x install.sh
+sudo ./install.sh
+
+#-------------------------------------------------------------------------#
+
+
+
 #-----------------------------------------------------# Fuente de Minecraft #-----------------------------------------------------#
 # - Descarga Monocraft y la aplica en kitty, illogical-impulse y VSCodium - #
 
