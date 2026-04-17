@@ -40,10 +40,12 @@ Archy se encarga de todo eso. Abres el menú, eliges lo que quieres, y te vas a 
 ## Instalación
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh)
+cd ~/Escritorio
+curl -O https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh
+bash install-archy.sh
 ```
 
-Eso es todo. A partir de ahí ejecutas `archy` desde cualquier terminal.
+A partir de ahí ejecutas `archy` desde cualquier terminal.
 
 ## Qué hace
 
