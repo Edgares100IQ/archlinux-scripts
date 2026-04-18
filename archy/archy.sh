@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$HOME/.local/share/archy/archy"
 LANG_FILE="$HOME/.local/share/archy/lang"
-I18N_DIR="$SCRIPT_DIR/idioma"
+I18N_DIR="$SCRIPT_DIR/scripts/idioma"
 
 # ── idioma ─────────────────────────────────────────────────────
 select_language() {
