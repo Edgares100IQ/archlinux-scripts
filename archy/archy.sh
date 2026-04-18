@@ -6,6 +6,7 @@ I18N_DIR="$SCRIPT_DIR/scripts/idioma"
 
 # ── idioma ─────────────────────────────────────────────────────
 select_language() {
+    clear
     echo ""
     echo "Selecciona tu idioma / Select your language / Choisissez votre langue / Sprache wählen:"
     echo "1. Español"
