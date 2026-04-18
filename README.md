@@ -1,6 +1,5 @@
 <p align="center">
   <pre align="center">
-                          ████████
                         ████████████
                     ████████████████████
                   ████████████████████████
@@ -25,6 +24,7 @@
               ████████████        ████████████
               ████████████        ████████████
               ████████████        ████████████  
+
   </pre>
 </p>
 
@@ -36,7 +36,7 @@
   <img src="https://img.shields.io/badge/Hyprland-58E1FF?style=flat"/>
   <img src="https://img.shields.io/badge/end--4_dotfiles-white?style=flat"/>
   <img src="https://img.shields.io/badge/bash-4EAA25?style=flat&logo=gnubash&logoColor=white"/>
-  <img src="https://img.shields.io/badge/version-1.0-gray?style=flat"/>
+  <img src="https://img.shields.io/badge/version-2.0-gray?style=flat"/>
 </p>
 
 ---
@@ -60,6 +60,29 @@ A partir de ahí ejecuta `archy` desde cualquier terminal.
 
 **Instalación personalizada** — vas eligiendo programa por programa lo que quieres instalar. Puedes volver al menú y seguir instalando cosas sin que se cierre.
 
+## Qué puede instalar
+
+**Entornos**
+- end-4 dotfiles (Hyprland + SDDM + audio)
+- Tema SDDM: SilentSDDM
+
+**Navegadores**
+- Firefox, Chromium, Brave, Opera, Tor Browser, Zen Browser
+
+**Editores de código**
+- VSCodium, Windsurf, Antigravity, LazyVim
+
+**Launchers de juegos**
+- Steam, Heroic Games Launcher
+
+## Novedades v2.0
+
+- **Soporte multiidioma** — español, english, français, deutsch. Se guarda en local y se puede cambiar desde ajustes en cualquier momento
+- **LazyVim** añadido como opción de editor
+- **SilentSDDM** ahora es un script independiente, se puede instalar solo o durante la instalación predeterminada
+- **Menú de ajustes** para cambiar el idioma sin reinstalar
+- **Reboot con confirmación** — ya no reinicia automáticamente al terminar
+
 ## Estructura
 
 ```
@@ -70,6 +93,8 @@ A partir de ahí ejecuta `archy` desde cualquier terminal.
     editores/
     launchers/
     entornos/
+    idioma/
+      es.sh  en.sh  fr.sh  de.sh
 ```
 
 Cada script funciona de forma independiente. Si algo falla solo falla ese, el resto no se ve afectado.
