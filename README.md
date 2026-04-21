@@ -24,7 +24,6 @@
               ████████████        ████████████
               ████████████        ████████████
               ████████████        ████████████  
-
   </pre>
 </p>
 
@@ -34,55 +33,58 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white"/>
   <img src="https://img.shields.io/badge/Hyprland-58E1FF?style=flat"/>
-  <img src="https://img.shields.io/badge/end--4_dotfiles-white?style=flat"/>
   <img src="https://img.shields.io/badge/bash-4EAA25?style=flat&logo=gnubash&logoColor=white"/>
   <img src="https://img.shields.io/badge/version-2.0-gray?style=flat"/>
 </p>
 
 ---
 
-Acabas de instalar Arch Linux. Ahora toca lo tedioso: instalar yay, configurar el entorno, buscar los paquetes uno por uno, acordarte de qué flags necesita cada cosa...
+Acabas de instalar Arch Linux. Ahora toca lo tedioso: instalar yay, configurar el entorno, buscar los paquetes uno por uno...
 
 Archy se encarga de todo eso. Abres el menú, eliges lo que quieres, y te vas a hacer otra cosa.
 
 ## Instalación
 
 ```bash
-sudo pacman -S git
-curl -O https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh
-bash install-archy.sh
+sudo pacman -S --needed git --noconfirm && curl -fsSL https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh | bash
 ```
 
 A partir de ahí ejecuta `archy` desde cualquier terminal.
 
-## Modos
+## Qué puede hacer
 
-**Instalación predeterminada** — eliges dotfiles, navegador, editor y launcher, y Archy monta todo el entorno de cero sin que tengas que tocar nada más.
+**🖥️ Entornos de escritorio**
+- end-4 dotfiles
+- imperative-dots
+- HyDE
+- Tema SDDM: SilentSDDM (instalable por separado)
 
-**Instalación personalizada** — vas eligiendo programa por programa lo que quieres instalar. Puedes volver al menú y seguir instalando cosas sin que se cierre.
-
-## Qué puede instalar
-
-**Entornos**
-- end-4 dotfiles (Hyprland + SDDM + audio)
-- Tema SDDM: SilentSDDM
-
-**Navegadores**
+**🌐 Navegadores**
 - Firefox, Chromium, Brave, Opera, Tor Browser, Zen Browser
 
-**Editores de código**
+**💻 Editores de código**
 - VSCodium, Windsurf, Antigravity, LazyVim
 
-**Launchers de juegos**
+**🎮 Launchers de juegos**
 - Steam, Heroic Games Launcher
 
-## Novedades v2.0
+**🗑️ Desinstalar programas**
+- Desinstala cualquier programa instalado con Archy desde el mismo menú
 
-- **Soporte multiidioma** — español, english, français, deutsch. Se guarda en local y se puede cambiar desde ajustes en cualquier momento
-- **LazyVim** añadido como opción de editor
-- **SilentSDDM** ahora es un script independiente, se puede instalar solo o durante la instalación predeterminada
-- **Menú de ajustes** para cambiar el idioma sin reinstalar
-- **Reboot con confirmación** — ya no reinicia automáticamente al terminar
+## Modos
+
+**Instalación completa** — eliges dotfiles, navegador, editor y launcher, y Archy monta todo el entorno de cero.
+
+**Instalaciones** — vas eligiendo programa por programa. Puedes volver al menú y seguir instalando cosas sin que se cierre.
+
+## Idiomas
+
+Archy pregunta el idioma la primera vez que lo ejecutas y lo guarda. Puedes cambiarlo en cualquier momento desde ajustes.
+
+- 🇪🇸 Español
+- 🇬🇧 English
+- 🇫🇷 Français
+- 🇩🇪 Deutsch
 
 ## Estructura
 
@@ -104,9 +106,20 @@ Cada script funciona de forma independiente. Si algo falla solo falla ese, el re
 
 - Arch Linux
 - Conexión a internet
-- `git` instalado
+- `git` instalado (el one-liner lo instala automáticamente)
 
 > Archy instala `yay` automáticamente si no lo tienes.
+
+## Novedades v2.0
+
+- **Soporte multiidioma** — ES, EN, FR, DE
+- **3 entornos** — end-4, imperative-dots y HyDE
+- **Desinstalar programas** desde el mismo menú
+- **LazyVim** añadido como opción de editor
+- **SilentSDDM** como script independiente
+- **Menú de ajustes** para cambiar el idioma
+- **Reboot con confirmación**
+- **Instalación en un solo comando**
 
 ---
 
