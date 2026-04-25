@@ -85,13 +85,25 @@ navigate_menu() {
         echo ""
     fi
 
-    # guardar posicion donde empiezan las opciones
-    local menu_line
-    menu_line=$(tput lines)
+    # guardar fila donde empiezan las opciones
+    local start_row
+    start_row=$(tput cup 0 0; tput lines)
+    start_row=$(echo -e "\033[6n" | cat; read -rs -d R pos; echo "${pos#*[}" | cut -d';' -f1)
+
+    # pintar opciones por primera vez
+    for i in "${!options[@]}"; do
+        if [ "$i" -eq "$selected" ]; then
+            echo -e "\e[7m  ${options[$i]}  \e[0m"
+        else
+            echo "  ${options[$i]}"
+        fi
+    done
+
+    # guardar fila actual despues de pintar
+    local end_row=$((start_row + count))
 
     draw_options() {
-        # mover cursor a la posicion de las opciones
-        tput cup $(($(tput lines) - count - 2)) 0
+        tput cup $((start_row - 1)) 0
         for i in "${!options[@]}"; do
             tput el
             if [ "$i" -eq "$selected" ]; then
@@ -101,8 +113,6 @@ navigate_menu() {
             fi
         done
     }
-
-    draw_options
 
     while true; do
         local key
