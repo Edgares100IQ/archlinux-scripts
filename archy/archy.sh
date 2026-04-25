@@ -4,6 +4,7 @@ SCRIPT_DIR="$HOME/.local/share/archy/archy"
 LANG_FILE="$HOME/.local/share/archy/lang"
 I18N_DIR="$SCRIPT_DIR/scripts/idioma"
 MENU_RESULT=0
+PATO_CACHE=""
 
 # ocultar/mostrar cursor
 cursor_hide() { printf "\e[?25l"; }
@@ -64,10 +65,11 @@ run_script() {
 logo() {
     clear
     echo "==================================================================="
-    chafa "$SCRIPT_DIR/pato.png" --size 40x22 --colors 256
-    echo
+    if [ -z "$PATO_CACHE" ]; then
+        PATO_CACHE=$(chafa "$SCRIPT_DIR/pato.png" --size 40x22 --colors 256)
+    fi
+    echo -e "$PATO_CACHE"
     echo " $MSG_HELLO"
-    echo
     echo "==================================================================="
     echo ""
 }
@@ -499,10 +501,6 @@ while true; do
         1) menu_personalizadas ;;
         2) menu_desinstalar ;;
         3) menu_ajustes ;;
-        4) clear
-           echo
-           echo "¡Espero que te haya servido de ayuda!"
-           echo
-           exit 0 ;;
+        4) exit 0 ;;
     esac
 done
