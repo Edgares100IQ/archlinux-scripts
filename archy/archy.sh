@@ -67,7 +67,7 @@ logo() {
     chafa "$SCRIPT_DIR/pato.png" --size 40x22 --colors 256
     echo
     echo " $MSG_HELLO"
-    echo 
+    echo
     echo "==================================================================="
     echo ""
 }
@@ -250,8 +250,18 @@ update_archy() {
     echo ">>> Actualizando archy..."
     REPO_URL="https://github.com/Edgares100IQ/archlinux-scripts.git"
     INSTALL_DIR="$HOME/.local/share/archy"
+    LANG_BACKUP="$HOME/.local/share/archy/lang"
+    TMP_DIR="/tmp/archy_update"
+    # guardar idioma
+    local saved_lang=""
+    [ -f "$LANG_BACKUP" ] && saved_lang=$(cat "$LANG_BACKUP")
+    # clonar en tmp y mover
+    rm -rf "$TMP_DIR"
+    git clone --depth 1 "$REPO_URL" "$TMP_DIR" &> /dev/null
     rm -rf "$INSTALL_DIR"
-    git clone --depth 1 "$REPO_URL" "$INSTALL_DIR" &> /dev/null
+    mv "$TMP_DIR" "$INSTALL_DIR"
+    # restaurar idioma
+    [ -n "$saved_lang" ] && echo "$saved_lang" > "$LANG_BACKUP"
     chmod +x "$INSTALL_DIR/archy/archy.sh"
     find "$INSTALL_DIR/archy/scripts" -name "*.sh" -exec chmod +x {} \;
     echo ">>> archy actualizado"
