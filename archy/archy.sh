@@ -188,19 +188,32 @@ menu_launcher() {
     esac
 }
 
+# ── minecraft ─────────────────────────────────────────────────
+menu_minecraft() {
+    local opts=(
+        "⛏️  minecraft oficial"
+        "🏴‍☠️  tlauncher"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "Minecraft" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/juegos/minecraft.sh" ;;
+        1) run_script "$SCRIPT_DIR/scripts/juegos/tlauncher.sh" ;;
+        2) return ;;
+    esac
+}
+
 # ── juegos ─────────────────────────────────────────────────────
 menu_juegos() {
     while true; do
         local opts=(
-            "⛏️  minecraft oficial"
-            "🏴‍☠️  tlauncher"
+            "⛏️  minecraft"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_GAMES_TITLE" "${opts[@]}"
         case "$MENU_RESULT" in
-            0) run_script "$SCRIPT_DIR/scripts/juegos/minecraft.sh"; return ;;
-            1) run_script "$SCRIPT_DIR/scripts/juegos/tlauncher.sh"; return ;;
-            2) return ;;
+            0) menu_minecraft ;;
+            1) return ;;
         esac
     done
 }
