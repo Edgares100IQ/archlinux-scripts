@@ -219,6 +219,26 @@ menu_juegos() {
 }
 
 # ── programas ──────────────────────────────────────────────────
+menu_utilidades() {
+    local opts=(
+        "🖥️  anydesk"
+        "💾 timeshift"
+        "🔒 keepassxc"
+        "📁 thunar"
+        "🖨️  cups"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/utilidades/anydesk.sh" ;;
+        1) run_script "$SCRIPT_DIR/scripts/utilidades/timeshift.sh" ;;
+        2) run_script "$SCRIPT_DIR/scripts/utilidades/keepassxc.sh" ;;
+        3) run_script "$SCRIPT_DIR/scripts/utilidades/thunar.sh" ;;
+        4) run_script "$SCRIPT_DIR/scripts/utilidades/cups.sh" ;;
+        5) return ;;
+    esac
+}
+
 menu_programas() {
     while true; do
         local opts=(
@@ -226,6 +246,7 @@ menu_programas() {
             "💻 $MSG_MENU_PROGRAMS_2"
             "🎮 $MSG_MENU_PROGRAMS_3"
             "🕹️  $MSG_MENU_PROGRAMS_4"
+            "🛠️  $MSG_MENU_PROGRAMS_5"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_PROGRAMS_TITLE" "${opts[@]}"
@@ -234,7 +255,8 @@ menu_programas() {
             1) menu_editor ;;
             2) menu_launcher ;;
             3) menu_juegos ;;
-            4) return ;;
+            4) menu_utilidades ;;
+            5) return ;;
         esac
     done
 }
