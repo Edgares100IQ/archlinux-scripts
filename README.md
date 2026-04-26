@@ -81,16 +81,18 @@ Cada script funciona de forma independiente. Si algo falla solo falla ese, el re
 
 > Archy instala `yay` automáticamente si no lo tienes.
 
-## Novedades v2.0
+## Novedades v3.0
 
-- **Soporte multiidioma** — ES, EN, FR, DE
-- **3 entornos** — end-4, imperative-dots y HyDE
-- **Desinstalar programas** desde el mismo menú
-- **LazyVim** añadido como opción de editor
-- **SilentSDDM** como script independiente
-- **Menú de ajustes** para cambiar el idioma
-- **Reboot con confirmación**
-- **Instalación en un solo comando**
+- **Nueva mascota** — pixel art duck 🦆  
+- **Navegación con flechas** en todos los menús  
+- **Apps de comunicación** — Discord, Telegram, WhatsApp, Spotify, Zoom, Element  
+- **Utilidades reorganizadas** — tools, security, files, office (LibreOffice)  
+- **Desinstalar todo lo instalado** desde Archy  
+- **Actualizaciones silenciosas** desde el menú de ajustes  
+- **Idioma persistente** — se guarda localmente y sobrevive a actualizaciones  
+- **Dotfiles soportados** — end-4, imperative-dots y HyDE  
+- **Idiomas disponibles** — ES, EN, FR, DE  
+- **Instalación en un solo comando**  en un solo comando**
 
 ---
 
