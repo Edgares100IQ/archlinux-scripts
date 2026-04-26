@@ -1,4 +1,4 @@
 #!/bin/bash
-echo ">>> Instalando WhatsApp..."
-yay -S --noconfirm --needed --answerclean All --answerdiff None whatsapp-nativefier
+echo ">>> Instalando WhatsApp (WhatsDesk)..."
+yay -S --noconfirm --needed --answerclean All --answerdiff None whatsdesk-bin
 echo ">>> WhatsApp instalado"
