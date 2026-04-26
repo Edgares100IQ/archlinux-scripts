@@ -219,24 +219,76 @@ menu_juegos() {
 }
 
 # ── programas ──────────────────────────────────────────────────
-menu_utilidades() {
+menu_herramientas() {
     local opts=(
         "🖥️  anydesk"
         "💾 timeshift"
-        "🔒 keepassxc"
-        "📁 thunar"
         "🖨️  cups"
         "↩  $MSG_BACK"
     )
-    navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
+    navigate_menu "$MSG_MENU_TOOLS_TITLE" "${opts[@]}"
     case "$MENU_RESULT" in
-        0) run_script "$SCRIPT_DIR/scripts/utilidades/anydesk.sh" ;;
-        1) run_script "$SCRIPT_DIR/scripts/utilidades/timeshift.sh" ;;
-        2) run_script "$SCRIPT_DIR/scripts/utilidades/keepassxc.sh" ;;
-        3) run_script "$SCRIPT_DIR/scripts/utilidades/thunar.sh" ;;
-        4) run_script "$SCRIPT_DIR/scripts/utilidades/cups.sh" ;;
-        5) return ;;
+        0) run_script "$SCRIPT_DIR/scripts/utilidades/herramientas/anydesk.sh" ;;
+        1) run_script "$SCRIPT_DIR/scripts/utilidades/herramientas/timeshift.sh" ;;
+        2) run_script "$SCRIPT_DIR/scripts/utilidades/herramientas/cups.sh" ;;
+        3) return ;;
     esac
+}
+
+menu_seguridad() {
+    local opts=(
+        "🔒 keepassxc"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_SECURITY_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/utilidades/seguridad/keepassxc.sh" ;;
+        1) return ;;
+    esac
+}
+
+menu_archivos() {
+    local opts=(
+        "📁 thunar"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_FILES_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/utilidades/archivos/thunar.sh" ;;
+        1) return ;;
+    esac
+}
+
+menu_ofimatica() {
+    local opts=(
+        "📄 libreoffice"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_OFFICE_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/utilidades/ofimatica/libreoffice.sh" ;;
+        1) return ;;
+    esac
+}
+
+menu_utilidades() {
+    while true; do
+        local opts=(
+            "🛠️  herramientas"
+            "🔒 seguridad"
+            "📁 archivos"
+            "📄 ofimática"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) menu_herramientas ;;
+            1) menu_seguridad ;;
+            2) menu_archivos ;;
+            3) menu_ofimatica ;;
+            4) return ;;
+        esac
+    done
 }
 
 menu_comunicacion() {
@@ -385,19 +437,21 @@ menu_desinstalar_utilidades() {
     local opts=(
         "🖥️  anydesk"
         "💾 timeshift"
+        "🖨️  cups"
         "🔒 keepassxc"
         "📁 thunar"
-        "🖨️  cups"
+        "📄 libreoffice"
         "↩  $MSG_BACK"
     )
     navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
     case "$MENU_RESULT" in
         0) cursor_show; yay -Rns anydesk-bin --noconfirm; cursor_hide ;;
         1) cursor_show; yay -Rns timeshift --noconfirm; cursor_hide ;;
-        2) cursor_show; sudo pacman -Rns keepassxc --noconfirm; cursor_hide ;;
-        3) cursor_show; sudo pacman -Rns thunar thunar-archive-plugin thunar-volman --noconfirm; cursor_hide ;;
-        4) cursor_show; sudo pacman -Rns cups cups-pdf system-config-printer --noconfirm; cursor_hide ;;
-        5) return ;;
+        2) cursor_show; sudo pacman -Rns cups cups-pdf system-config-printer --noconfirm; cursor_hide ;;
+        3) cursor_show; sudo pacman -Rns keepassxc --noconfirm; cursor_hide ;;
+        4) cursor_show; sudo pacman -Rns thunar thunar-archive-plugin thunar-volman --noconfirm; cursor_hide ;;
+        5) cursor_show; sudo pacman -Rns libreoffice-fresh libreoffice-fresh-es --noconfirm; cursor_hide ;;
+        6) return ;;
     esac
 }
 
