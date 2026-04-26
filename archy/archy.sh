@@ -239,6 +239,28 @@ menu_utilidades() {
     esac
 }
 
+menu_comunicacion() {
+    local opts=(
+        "💬 discord"
+        "✈️  telegram"
+        "💚 whatsapp"
+        "🎵 spotify"
+        "📹 zoom"
+        "🟦 element"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_COMM_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) run_script "$SCRIPT_DIR/scripts/comunicacion/discord.sh" ;;
+        1) run_script "$SCRIPT_DIR/scripts/comunicacion/telegram.sh" ;;
+        2) run_script "$SCRIPT_DIR/scripts/comunicacion/whatsapp.sh" ;;
+        3) run_script "$SCRIPT_DIR/scripts/comunicacion/spotify.sh" ;;
+        4) run_script "$SCRIPT_DIR/scripts/comunicacion/zoom.sh" ;;
+        5) run_script "$SCRIPT_DIR/scripts/comunicacion/element.sh" ;;
+        6) return ;;
+    esac
+}
+
 menu_programas() {
     while true; do
         local opts=(
@@ -247,6 +269,7 @@ menu_programas() {
             "🎮 $MSG_MENU_PROGRAMS_3"
             "🕹️  $MSG_MENU_PROGRAMS_4"
             "🛠️  $MSG_MENU_PROGRAMS_5"
+            "💬 $MSG_MENU_PROGRAMS_6"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_PROGRAMS_TITLE" "${opts[@]}"
@@ -256,7 +279,8 @@ menu_programas() {
             2) menu_launcher ;;
             3) menu_juegos ;;
             4) menu_utilidades ;;
-            5) return ;;
+            5) menu_comunicacion ;;
+            6) return ;;
         esac
     done
 }
