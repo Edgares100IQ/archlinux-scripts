@@ -367,6 +367,50 @@ menu_ajustes() {
     done
 }
 
+# ── desinstalar utilidades ────────────────────────────────────
+menu_desinstalar_utilidades() {
+    local opts=(
+        "🖥️  anydesk"
+        "💾 timeshift"
+        "🔒 keepassxc"
+        "📁 thunar"
+        "🖨️  cups"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) cursor_show; yay -Rns anydesk-bin --noconfirm; cursor_hide ;;
+        1) cursor_show; yay -Rns timeshift --noconfirm; cursor_hide ;;
+        2) cursor_show; sudo pacman -Rns keepassxc --noconfirm; cursor_hide ;;
+        3) cursor_show; sudo pacman -Rns thunar thunar-archive-plugin thunar-volman --noconfirm; cursor_hide ;;
+        4) cursor_show; sudo pacman -Rns cups cups-pdf system-config-printer --noconfirm; cursor_hide ;;
+        5) return ;;
+    esac
+}
+
+# ── desinstalar comunicacion ───────────────────────────────────
+menu_desinstalar_comunicacion() {
+    local opts=(
+        "💬 discord"
+        "✈️  telegram"
+        "💚 whatsapp"
+        "🎵 spotify"
+        "📹 zoom"
+        "🟦 element"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_COMM_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) cursor_show; yay -Rns discord --noconfirm; cursor_hide ;;
+        1) cursor_show; sudo pacman -Rns telegram-desktop --noconfirm; cursor_hide ;;
+        2) cursor_show; yay -Rns whatsapp-nativefier --noconfirm; cursor_hide ;;
+        3) cursor_show; yay -Rns spotify --noconfirm; cursor_hide ;;
+        4) cursor_show; yay -Rns zoom --noconfirm; cursor_hide ;;
+        5) cursor_show; yay -Rns element-desktop --noconfirm; cursor_hide ;;
+        6) return ;;
+    esac
+}
+
 # ── desinstalar navegador ──────────────────────────────────────
 menu_desinstalar_navegador() {
     local opts=(
@@ -424,6 +468,50 @@ menu_desinstalar_launcher() {
     esac
 }
 
+# ── desinstalar utilidades ────────────────────────────────────
+menu_desinstalar_utilidades() {
+    local opts=(
+        "🖥️  anydesk"
+        "💾 timeshift"
+        "🔒 keepassxc"
+        "📁 thunar"
+        "🖨️  cups"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_UTILS_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) cursor_show; yay -Rns anydesk-bin --noconfirm; cursor_hide ;;
+        1) cursor_show; yay -Rns timeshift --noconfirm; cursor_hide ;;
+        2) cursor_show; sudo pacman -Rns keepassxc --noconfirm; cursor_hide ;;
+        3) cursor_show; sudo pacman -Rns thunar thunar-archive-plugin thunar-volman --noconfirm; cursor_hide ;;
+        4) cursor_show; sudo pacman -Rns cups cups-pdf system-config-printer --noconfirm; cursor_hide ;;
+        5) return ;;
+    esac
+}
+
+# ── desinstalar comunicacion ───────────────────────────────────
+menu_desinstalar_comunicacion() {
+    local opts=(
+        "💬 discord"
+        "✈️  telegram"
+        "💚 whatsapp"
+        "🎵 spotify"
+        "📹 zoom"
+        "🟦 element"
+        "↩  $MSG_BACK"
+    )
+    navigate_menu "$MSG_MENU_COMM_TITLE" "${opts[@]}"
+    case "$MENU_RESULT" in
+        0) cursor_show; yay -Rns discord --noconfirm; cursor_hide ;;
+        1) cursor_show; sudo pacman -Rns telegram-desktop --noconfirm; cursor_hide ;;
+        2) cursor_show; yay -Rns whatsapp-nativefier --noconfirm; cursor_hide ;;
+        3) cursor_show; yay -Rns spotify --noconfirm; cursor_hide ;;
+        4) cursor_show; yay -Rns zoom --noconfirm; cursor_hide ;;
+        5) cursor_show; yay -Rns element-desktop --noconfirm; cursor_hide ;;
+        6) return ;;
+    esac
+}
+
 # ── desinstalar programas ──────────────────────────────────────
 menu_desinstalar() {
     while true; do
@@ -431,6 +519,8 @@ menu_desinstalar() {
             "🌐 $MSG_MENU_PROGRAMS_1"
             "💻 $MSG_MENU_PROGRAMS_2"
             "🎮 $MSG_MENU_PROGRAMS_3"
+            "🛠️  $MSG_MENU_PROGRAMS_5"
+            "💬 $MSG_MENU_PROGRAMS_6"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_UNINSTALL_TITLE" "${opts[@]}"
@@ -438,7 +528,9 @@ menu_desinstalar() {
             0) menu_desinstalar_navegador ;;
             1) menu_desinstalar_editor ;;
             2) menu_desinstalar_launcher ;;
-            3) return ;;
+            3) menu_desinstalar_utilidades ;;
+            4) menu_desinstalar_comunicacion ;;
+            5) return ;;
         esac
     done
 }
