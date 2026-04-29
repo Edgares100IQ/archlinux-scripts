@@ -618,6 +618,33 @@ menu_predeterminadas() {
     done
 }
 
+# ── herramientas avanzadas ────────────────────────────────────
+menu_sistema() {
+    while true; do
+        local opts=(
+            "💽 $MSG_SISTEMA_FORMAT"
+            "📋 $MSG_SISTEMA_DD"
+            "🔍 $MSG_SISTEMA_SMART"
+            "📊 $MSG_SISTEMA_HTOP"
+            "🧹 $MSG_SISTEMA_CLEAN"
+            "🌐 $MSG_SISTEMA_NET"
+            "⏱️  $MSG_SISTEMA_SYSTEMD"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_SISTEMA_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) run_script "$SCRIPT_DIR/scripts/sistema/formatear_disco.sh" ;;
+            1) run_script "$SCRIPT_DIR/scripts/sistema/dd.sh" ;;
+            2) run_script "$SCRIPT_DIR/scripts/sistema/smartctl.sh" ;;
+            3) run_script "$SCRIPT_DIR/scripts/sistema/htop.sh" ;;
+            4) run_script "$SCRIPT_DIR/scripts/sistema/limpieza.sh" ;;
+            5) run_script "$SCRIPT_DIR/scripts/sistema/red.sh" ;;
+            6) run_script "$SCRIPT_DIR/scripts/sistema/systemd.sh" ;;
+            7) return ;;
+        esac
+    done
+}
+
 # ── inicio ─────────────────────────────────────────────────────
 load_language
 
