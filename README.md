@@ -17,7 +17,7 @@ Archy se encarga de todo eso. Abres el menú, eliges lo que quieres, y te vas a 
 ## Instalación
 
 ```bash
-sudo pacman -S --needed git --noconfirm && curl -fsSL https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh | bash
+sudo pacman -S --needed git chafa --noconfirm && curl -fsSL https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh | bash
 ```
 
 A partir de ahí ejecuta `archy` desde cualquier terminal.
