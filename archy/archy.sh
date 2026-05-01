@@ -61,10 +61,26 @@ run_script() {
     cursor_hide
 }
 
+_get_bg_color() {
+    local response
+    printf '\e]11;?\a' > /dev/tty
+    IFS= read -t 0.2 -rs response < /dev/tty 2>/dev/null
+    if [[ "$response" =~ rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+) ]]; then
+        local r=${BASH_REMATCH[1]:0:2}
+        local g=${BASH_REMATCH[2]:0:2}
+        local b=${BASH_REMATCH[3]:0:2}
+        echo "#${r}${g}${b}"
+    else
+        echo "#000000"
+    fi
+}
+
 logo() {
     clear
     echo "==================================================================="
-    chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256 --fg-only
+    local bg
+    bg=$(_get_bg_color)
+    chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256 --bg "$bg"
     echo " $MSG_HELLO"
     echo "==================================================================="
     echo ""
