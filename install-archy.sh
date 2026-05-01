@@ -8,6 +8,29 @@ REPO_URL="https://github.com/Edgares100IQ/archlinux-scripts.git"
 INSTALL_DIR="$HOME/.local/share/archy"
 WRAPPER="/usr/local/bin/archy"
 
+echo ">>> Comprobando dependencias..."
+
+# instalar yay si no está
+if ! command -v yay &>/dev/null; then
+    echo "    instalando yay..."
+    sudo pacman -S --needed --noconfirm git base-devel
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    (cd /tmp/yay && makepkg -si --noconfirm)
+    rm -rf /tmp/yay
+fi
+
+# instalar chafa si no está
+if ! command -v chafa &>/dev/null; then
+    echo "    instalando chafa..."
+    sudo pacman -S --needed --noconfirm chafa
+fi
+
+# instalar imagemagick si no está
+if ! command -v convert &>/dev/null; then
+    echo "    instalando imagemagick..."
+    sudo pacman -S --needed --noconfirm imagemagick
+fi
+
 echo ">>> Clonando repositorio..."
 rm -rf "$INSTALL_DIR"
 git clone --depth 1 "$REPO_URL" "$INSTALL_DIR"
