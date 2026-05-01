@@ -64,7 +64,7 @@ run_script() {
 _sixel_supported() {
     local response
     printf '\e[c' > /dev/tty
-    response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0')
+    response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0\a\e')
     [[ "$response" == *";4;"* || "$response" == *";4c"* ]]
 }
 
@@ -72,7 +72,7 @@ logo() {
     clear
     echo "==================================================================="
     if _sixel_supported; then
-        convert "$SCRIPT_DIR/pato.png" -geometry 200x200 sixel:-
+        magick "$SCRIPT_DIR/pato.png" -geometry 200x200 sixel:- 2>/dev/null
     else
         chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256
     fi
@@ -395,11 +395,10 @@ update_archy() {
     [ -f "$LANG_BACKUP" ] && saved_lang=$(cat "$LANG_BACKUP")
     rm -rf "$TMP_DIR"
     git clone --depth 1 "$REPO_URL" "$TMP_DIR" &> /dev/null
-    rm -rf "$INSTALL_DIR"
-    mv "$TMP_DIR" "$INSTALL_DIR"
+    [ -n "$saved_lang" ] && echo "$saved_lang" > "$TMP_DIR/lang"
+    chmod +x "$TMP_DIR/install-archy.sh"
+    bash "$TMP_DIR/install-archy.sh"
     [ -n "$saved_lang" ] && echo "$saved_lang" > "$LANG_BACKUP"
-    chmod +x "$INSTALL_DIR/archy/archy.sh"
-    find "$INSTALL_DIR/archy/scripts" -name "*.sh" -exec chmod +x {} \;
     echo ">>> archy actualizado"
     sleep 1
     cursor_hide
