@@ -64,7 +64,7 @@ run_script() {
 _get_bg_color() {
     local response
     printf '\e]11;?\a' > /dev/tty
-    IFS= read -t 0.2 -rs response < /dev/tty 2>/dev/null
+    response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0')
     if [[ "$response" =~ rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+) ]]; then
         local r=${BASH_REMATCH[1]:0:2}
         local g=${BASH_REMATCH[2]:0:2}
