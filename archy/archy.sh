@@ -63,8 +63,10 @@ run_script() {
 
 _sixel_supported() {
     local response
+    stty -echo -icanon min 0 time 2 2>/dev/null
     printf '\e[c' > /dev/tty
     response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0\a\e')
+    stty echo icanon 2>/dev/null
     [[ "$response" == *";4;"* || "$response" == *";4c"* ]]
 }
 
