@@ -64,7 +64,7 @@ run_script() {
 logo() {
     clear
     echo "==================================================================="
-    chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256
+    chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256 --fg-only
     echo " $MSG_HELLO"
     echo "==================================================================="
     echo ""
