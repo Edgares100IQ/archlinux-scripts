@@ -654,6 +654,7 @@ while true; do
         "🧰 $MSG_MENU_MAIN_1"
         "🔧 $MSG_MENU_MAIN_2"
         "🗑️ $MSG_MENU_MAIN_3"
+        "🖥️  $MSG_MENU_MAIN_6"
         "⚙️ $MSG_MENU_MAIN_4"
         "🚪 $MSG_MENU_MAIN_5"
     )
@@ -662,8 +663,9 @@ while true; do
         0) menu_predeterminadas ;;
         1) menu_personalizadas ;;
         2) menu_desinstalar ;;
-        3) menu_ajustes ;;
-        4) clear
+        3) menu_sistema ;;
+        4) menu_ajustes ;;
+        5) clear
            echo
            echo "¡Espero que te haya servido de ayuda!"
            echo
