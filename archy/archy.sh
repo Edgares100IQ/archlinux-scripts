@@ -230,17 +230,38 @@ menu_minecraft() {
     esac
 }
 
+# ── mod launchers ──────────────────────────────────────────────
+menu_mod_launchers() {
+    while true; do
+        local opts=(
+            "🔷 prism launcher"
+            "🟠 curseforge"
+            "🌿 modrinth app"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "mod launchers" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) run_script "$SCRIPT_DIR/scripts/juegos/prism.sh" ;;
+            1) run_script "$SCRIPT_DIR/scripts/juegos/curseforge.sh" ;;
+            2) run_script "$SCRIPT_DIR/scripts/juegos/modrinth.sh" ;;
+            3) return ;;
+        esac
+    done
+}
+
 # ── juegos ─────────────────────────────────────────────────────
 menu_juegos() {
     while true; do
         local opts=(
             "⛏️  minecraft"
+            "🧩 mod launchers"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_GAMES_TITLE" "${opts[@]}"
         case "$MENU_RESULT" in
             0) menu_minecraft ;;
-            1) return ;;
+            1) menu_mod_launchers ;;
+            2) return ;;
         esac
     done
 }
