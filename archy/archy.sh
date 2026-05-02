@@ -94,20 +94,29 @@ logo() {
         fi
         printf '%b' "$_PATO_CACHE"
     fi
-    echo
     echo " $MSG_HELLO"
-    echo
     echo "==================================================================="
     echo ""
 }
 
 # ── navegación por flechas ─────────────────────────────────────
+_LAST_SELECTED=0
+_LAST_WAS_BACK=0
+
 navigate_menu() {
     local title="$1"
     shift
     local options=("$@")
     local count=${#options[@]}
-    local selected=0
+
+    # si la última selección fue "volver" (última opción), ir a la última de este menú también
+    local selected
+    if [ "$_LAST_WAS_BACK" -eq 1 ]; then
+        selected=$((count-1))
+    else
+        selected=$_LAST_SELECTED
+        [ "$selected" -ge "$count" ] && selected=$((count-1))
+    fi
 
     cursor_hide
     logo
@@ -150,6 +159,13 @@ navigate_menu() {
             esac
         elif [[ "$key" == "" ]]; then
             MENU_RESULT=$selected
+            _LAST_SELECTED=$selected
+            # marcar si fue la última opción
+            if [ "$selected" -eq $((count-1)) ]; then
+                _LAST_WAS_BACK=1
+            else
+                _LAST_WAS_BACK=0
+            fi
             return
         fi
     done
