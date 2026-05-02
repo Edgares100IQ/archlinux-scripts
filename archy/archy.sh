@@ -217,17 +217,21 @@ menu_launcher() {
 
 # ── minecraft ─────────────────────────────────────────────────
 menu_minecraft() {
-    local opts=(
-        "⛏️  minecraft oficial"
-        "🏴‍☠️  tlauncher"
-        "↩  $MSG_BACK"
-    )
-    navigate_menu "Minecraft" "${opts[@]}"
-    case "$MENU_RESULT" in
-        0) run_script "$SCRIPT_DIR/scripts/juegos/minecraft.sh" ;;
-        1) run_script "$SCRIPT_DIR/scripts/juegos/tlauncher.sh" ;;
-        2) return ;;
-    esac
+    while true; do
+        local opts=(
+            "⛏️  minecraft oficial"
+            "🏴‍☠️  tlauncher"
+            "🧩 mod launchers"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "Minecraft" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) run_script "$SCRIPT_DIR/scripts/juegos/minecraft.sh" ;;
+            1) run_script "$SCRIPT_DIR/scripts/juegos/tlauncher.sh" ;;
+            2) menu_mod_launchers ;;
+            3) return ;;
+        esac
+    done
 }
 
 # ── mod launchers ──────────────────────────────────────────────
@@ -254,14 +258,12 @@ menu_juegos() {
     while true; do
         local opts=(
             "⛏️  minecraft"
-            "🧩 mod launchers"
             "↩  $MSG_BACK"
         )
         navigate_menu "$MSG_MENU_GAMES_TITLE" "${opts[@]}"
         case "$MENU_RESULT" in
             0) menu_minecraft ;;
-            1) menu_mod_launchers ;;
-            2) return ;;
+            1) return ;;
         esac
     done
 }
