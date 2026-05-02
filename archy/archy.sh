@@ -486,17 +486,88 @@ menu_ajustes() {
     done
 }
 
+# ── desinstalar navegadores ───────────────────────────────────
+menu_desinstalar_navegador() {
+    while true; do
+        local opts=(
+            "🦊 firefox"
+            "🔵 chromium"
+            "🦁 brave"
+            "🎭 opera"
+            "🧅 tor browser"
+            "🌀 zen browser"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_MENU_BROWSER_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) cursor_show; sudo pacman -Rns firefox --noconfirm; cursor_hide ;;
+            1) cursor_show; sudo pacman -Rns chromium --noconfirm; cursor_hide ;;
+            2) cursor_show; yay -Rns brave-bin --noconfirm; cursor_hide ;;
+            3) cursor_show; yay -Rns opera --noconfirm; cursor_hide ;;
+            4) cursor_show; yay -Rns tor-browser-bin --noconfirm; cursor_hide ;;
+            5) cursor_show; yay -Rns zen-browser-bin --noconfirm; cursor_hide ;;
+            6) return ;;
+        esac
+    done
+}
+
+# ── desinstalar editores ──────────────────────────────────────
+menu_desinstalar_editor() {
+    while true; do
+        local opts=(
+            "💠 vscodium"
+            "🌊 windsurf"
+            "⚡ antigravity"
+            "🦥 lazyvim"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_MENU_EDITOR_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) cursor_show; yay -Rns vscodium-bin --noconfirm; cursor_hide ;;
+            1) cursor_show; yay -Rns windsurf --noconfirm; cursor_hide ;;
+            2) cursor_show; yay -Rns antigravity --noconfirm; cursor_hide ;;
+            3) cursor_show; sudo pacman -Rns neovim --noconfirm; cursor_hide ;;
+            4) return ;;
+        esac
+    done
+}
+
+# ── desinstalar launchers ─────────────────────────────────────
+menu_desinstalar_launcher() {
+    while true; do
+        local opts=(
+            "🎮 steam"
+            "🦸 heroic games launcher"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_MENU_LAUNCHER_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) cursor_show; flatpak uninstall com.valvesoftware.Steam -y; cursor_hide ;;
+            1) cursor_show; yay -Rns heroic-games-launcher-bin --noconfirm; cursor_hide ;;
+            2) return ;;
+        esac
+    done
+}
+
 # ── desinstalar juegos ────────────────────────────────────────
 menu_desinstalar_juegos() {
-    local opts=(
-        "⛏️  minecraft"
-        "↩  $MSG_BACK"
-    )
-    navigate_menu "$MSG_MENU_GAMES_TITLE" "${opts[@]}"
-    case "$MENU_RESULT" in
-        0) run_script "$SCRIPT_DIR/scripts/juegos/desinstalar_minecraft.sh" ;;
-        1) return ;;
-    esac
+    while true; do
+        local opts=(
+            "⛏️  minecraft"
+            "🔷 prism launcher"
+            "🟠 curseforge"
+            "🌿 modrinth app"
+            "↩  $MSG_BACK"
+        )
+        navigate_menu "$MSG_MENU_GAMES_TITLE" "${opts[@]}"
+        case "$MENU_RESULT" in
+            0) run_script "$SCRIPT_DIR/scripts/juegos/desinstalar_minecraft.sh" ;;
+            1) cursor_show; sudo pacman -Rns prismlauncher --noconfirm; cursor_hide ;;
+            2) cursor_show; yay -Rns curseforge --noconfirm; cursor_hide ;;
+            3) cursor_show; yay -Rns modrinth-app --noconfirm; cursor_hide ;;
+            4) return ;;
+        esac
+    done
 }
 
 # ── desinstalar utilidades ────────────────────────────────────
