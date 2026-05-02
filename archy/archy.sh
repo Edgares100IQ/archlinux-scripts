@@ -61,22 +61,38 @@ run_script() {
     cursor_hide
 }
 
+_SIXEL_SUPPORT=""
+_PATO_CACHE=""
+
 _sixel_supported() {
-    local response
-    stty -echo -icanon min 0 time 2 2>/dev/null
-    printf '\e[c' > /dev/tty
-    response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0\a\e')
-    stty echo icanon 2>/dev/null
-    [[ "$response" == *";4;"* || "$response" == *";4c"* ]]
+    if [ -z "$_SIXEL_SUPPORT" ]; then
+        local response
+        stty -echo -icanon min 0 time 2 2>/dev/null
+        printf '\e[c' > /dev/tty
+        response=$(dd if=/dev/tty bs=64 count=1 2>/dev/null | tr -d '\0\a\e')
+        stty echo icanon 2>/dev/null
+        if [[ "$response" == *";4;"* || "$response" == *";4c"* ]]; then
+            _SIXEL_SUPPORT="yes"
+        else
+            _SIXEL_SUPPORT="no"
+        fi
+    fi
+    [[ "$_SIXEL_SUPPORT" == "yes" ]]
 }
 
 logo() {
     clear
     echo "==================================================================="
-    if _sixel_supported; then
-        magick "$SCRIPT_DIR/pato.png" -geometry 200x200 sixel:- 2>/dev/null
+    if [ -n "$_PATO_CACHE" ]; then
+        printf '%b' "$_PATO_CACHE"
+    elif _sixel_supported; then
+        _PATO_CACHE=$(magick "$SCRIPT_DIR/pato.png" -geometry 200x200 sixel:- 2>/dev/null)
+        printf '%b' "$_PATO_CACHE"
     else
-        chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256
+        if [ -z "$_PATO_CACHE" ]; then
+            _PATO_CACHE=$(chafa "$SCRIPT_DIR/pato.png" --size 40x20 --colors 256)
+        fi
+        printf '%b' "$_PATO_CACHE"
     fi
     echo " $MSG_HELLO"
     echo "==================================================================="
