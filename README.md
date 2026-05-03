@@ -1,99 +1,71 @@
-<h1 align="center">ARCHY</h1>
-<p align="center">Post-instalador interactivo para Arch Linux</p>
+# Archy v3
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Hyprland-58E1FF?style=flat"/>
-  <img src="https://img.shields.io/badge/bash-4EAA25?style=flat&logo=gnubash&logoColor=white"/>
-  <img src="https://img.shields.io/badge/version-2.0-gray?style=flat"/>
-</p>
+An interactive post-installer for Arch Linux with Hyprland, written in pure Bash.
 
----
+![Archy demo](https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/archy/pato.png)
 
-Acabas de instalar Arch Linux. Ahora toca lo tedioso: instalar yay, configurar el entorno, buscar los paquetes uno por uno...
+## What is Archy?
 
-Archy se encarga de todo eso. Abres el menú, eliges lo que quieres, y te vas a hacer otra cosa.
+Archy is a post-installer script that helps you set up a full Arch Linux + Hyprland environment after a fresh install. It provides an interactive arrow-key menu to install desktop environments, programs, and utilities — no manual package hunting required.
 
-## Instalación
+## Features
+
+- 🖱️ Interactive arrow-key navigation menus
+- 🌍 Multilingual support: Spanish, English, French, German
+- 🖼️ Sixel image rendering with automatic terminal detection (fallback to chafa)
+- 🖥️ Desktop environment installers: end-4 dotfiles, imperative-dots, HyDE
+- 🌐 Browsers: Firefox, Chromium, Brave, Opera, Tor, Zen
+- 💻 Code editors: VSCodium, Windsurf, Antigravity, LazyVim
+- 🎮 Game launchers: Steam, Heroic Games Launcher
+- ⛏️ Games: Minecraft (official + TLauncher), Prism Launcher, CurseForge, Modrinth
+- 🛠️ Utilities: AnyDesk, Timeshift, CUPS, KeePassXC, Thunar, LibreOffice
+- 💬 Communication: Discord, Telegram, WhatsApp, Spotify, Zoom, Element
+- 🗑️ Uninstall section with confirmation for all installed packages
+- 🔄 Self-update system
+
+## Requirements
+
+- Arch Linux (fresh install recommended)
+- Internet connection
+- `git` and `base-devel` installed
+
+## Install
 
 ```bash
-sudo pacman -S --needed git chafa --noconfirm && curl -fsSL https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Edgares100IQ/archlinux-scripts/main/install-archy.sh | bash
 ```
 
-A partir de ahí ejecuta `archy` desde cualquier terminal.
+This will automatically install dependencies (`yay`, `chafa`, `imagemagick`) if not already present.
 
-## Qué puede hacer
+## Usage
 
-**🖥️ Entornos de escritorio**
-- end-4 dotfiles
-- imperative-dots
-- HyDE
-- Tema SDDM: SilentSDDM (instalable por separado)
+After installation, run from any terminal:
 
-**🌐 Navegadores**
-- Firefox, Chromium, Brave, Opera, Tor Browser, Zen Browser
-
-**💻 Editores de código**
-- VSCodium, Windsurf, Antigravity, LazyVim
-
-**🎮 Launchers de juegos**
-- Steam, Heroic Games Launcher
-
-**🗑️ Desinstalar programas**
-- Desinstala cualquier programa instalado con Archy desde el mismo menú
-
-## Modos
-
-**Instalación completa** — eliges dotfiles, navegador, editor y launcher, y Archy monta todo el entorno de cero.
-
-**Instalaciones** — vas eligiendo programa por programa. Puedes volver al menú y seguir instalando cosas sin que se cierre.
-
-## Idiomas
-
-Archy pregunta el idioma la primera vez que lo ejecutas y lo guarda. Puedes cambiarlo en cualquier momento desde ajustes.
-
-- 🇪🇸 Español
-- 🇬🇧 English
-- 🇫🇷 Français
-- 🇩🇪 Deutsch
-
-## Estructura
-
-```
-~/.local/share/archy/
-  archy.sh
-  scripts/
-    navegadores/
-    editores/
-    launchers/
-    entornos/
-    idioma/
-      es.sh  en.sh  fr.sh  de.sh
+```bash
+archy
 ```
 
-Cada script funciona de forma independiente. Si algo falla solo falla ese, el resto no se ve afectado.
+## What gets installed with sudo?
 
-## Requisitos
+Archy uses `sudo` for `pacman` commands and to create the `/usr/local/bin/archy` wrapper. AUR packages are installed via `yay` without root. You can review every script in `archy/scripts/` before running.
 
-- Arch Linux
-- Conexión a internet
-- `git` instalado (el one-liner lo instala automáticamente)
+## Project structure
 
-> Archy instala `yay` automáticamente si no lo tienes.
+```
+archy/
+├── archy.sh              # main script
+├── pato.png              # logo
+└── scripts/
+    ├── idioma/           # language files (es, en, fr, de)
+    ├── entornos/         # desktop environment installers
+    ├── navegadores/      # browser installers
+    ├── editores/         # code editor installers
+    ├── launchers/        # game launcher installers
+    ├── juegos/           # game installers
+    ├── utilidades/       # utility installers
+    └── comunicacion/     # communication app installers
+```
 
-## Novedades v3.0
+## License
 
-- **Nueva mascota** — pixel art duck 🦆  
-- **Navegación con flechas** en todos los menús  
-- **Apps de comunicación** — Discord, Telegram, WhatsApp, Spotify, Zoom, Element  
-- **Utilidades reorganizadas** — tools, security, files, office (LibreOffice)  
-- **Desinstalar todo lo instalado** desde Archy  
-- **Actualizaciones silenciosas** desde el menú de ajustes  
-- **Idioma persistente** — se guarda localmente y sobrevive a actualizaciones  
-- **Dotfiles soportados** — end-4, imperative-dots y HyDE  
-- **Idiomas disponibles** — ES, EN, FR, DE  
-- **Instalación en un solo comando**  en un solo comando**
-
----
-
-<p align="center">hecho para no perder el tiempo</p>
+MIT — see [LICENSE](LICENSE)
