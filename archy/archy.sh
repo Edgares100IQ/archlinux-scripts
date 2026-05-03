@@ -248,7 +248,7 @@ menu_minecraft() {
             "🧩 mod launchers"
             "↩  $MSG_BACK"
         )
-        navigate_menu "Minecraft" "${opts[@]}"
+        navigate_menu "$MSG_MINECRAFT" "${opts[@]}"
         case "$MENU_RESULT" in
             0) run_script "$SCRIPT_DIR/scripts/juegos/minecraft.sh" ;;
             1) run_script "$SCRIPT_DIR/scripts/juegos/tlauncher.sh" ;;
@@ -267,7 +267,7 @@ menu_mod_launchers() {
             "🌿 modrinth app"
             "↩  $MSG_BACK"
         )
-        navigate_menu "mod launchers" "${opts[@]}"
+        navigate_menu "$MSG_MOD_LAUNCHERS" "${opts[@]}"
         case "$MENU_RESULT" in
             0) run_script "$SCRIPT_DIR/scripts/juegos/prism.sh" ;;
             1) run_script "$SCRIPT_DIR/scripts/juegos/curseforge.sh" ;;
@@ -453,7 +453,7 @@ menu_personalizadas() {
 update_archy() {
     cursor_show
     clear
-    echo ">>> Actualizando archy..."
+    echo "$MSG_UPDATING"
     REPO_URL="https://github.com/Edgares100IQ/archlinux-scripts.git"
     INSTALL_DIR="$HOME/.local/share/archy"
     LANG_BACKUP="$HOME/.local/share/archy/lang"
@@ -466,7 +466,7 @@ update_archy() {
     chmod +x "$TMP_DIR/install-archy.sh"
     bash "$TMP_DIR/install-archy.sh"
     [ -n "$saved_lang" ] && echo "$saved_lang" > "$LANG_BACKUP"
-    echo ">>> archy actualizado"
+    echo "$MSG_UPDATED"
     sleep 1
     cursor_hide
     exec bash "$INSTALL_DIR/archy/archy.sh"
@@ -813,7 +813,7 @@ while true; do
            if [ "$MENU_RESULT" -eq 0 ]; then
                clear
                echo
-               echo "¡Espero que te haya servido de ayuda!"
+               echo "$MSG_GOODBYE"
                echo
                exit 0
            fi ;;
